@@ -32,15 +32,15 @@ for node in os.listdir(args.DIR):
 	if not os.path.isdir(path):
 		continue
 	filename = os.path.join(path, node + ".xml")
+	print "Converting %s..." % filename
 	try:
 		tree = ET.ElementTree(file = filename)
 	except IOError:
 		print "File %s not found!" % filename
 		continue
-	print "Converting %s..." % filename
 	result = []
 	for prof in tree.getroot():
-		d = {"school": node}
+		d = {"school": node, "group": "|"}
 		for info in prof:
 			d[info.tag] = info.text
 		result.append(d)
