@@ -37,7 +37,7 @@ DB_INIT_TABLE = {
 	`id` int NOT NULL AUTO_INCREMENT,
 	`school` varchar(255) NOT NULL,
 	`name` varchar(255) NOT NULL,
-	`prof_id` varchar(255) DEFAULT NULL,
+	`prof_id` varchar(1023) DEFAULT NULL,
 	`prof_name` varchar(1023) DEFAULT NULL,
 	PRIMARY KEY (`id`)
 ) DEFAULT CHARSET=utf8"""
@@ -75,3 +75,26 @@ def init_table(table_name):
 	print "Initializing table: %s" % table_name
 	db.execute("drop table if exists %s" % table_name)
 	db.execute(DB_INIT_TABLE[table_name])
+
+try:
+	import xml.etree.cElementTree as ET
+except ImportError:
+	import xml.etree.ElementTree as ET
+
+import traceback
+def get_tree(succ_file, fail_file, filename):
+	print "Converting %s..." % filename
+	while True:
+		try:
+			tree = ET.ElementTree(file = filename)
+			succ_file.write(filename + "\n")
+			return tree
+		except IOError:
+			print "File %s not found!" % filename
+			fail_file.write("File %s not found!\n" % filename)
+			raise Exception("File %s not found!" % filename)
+		except:
+			traceback.print_exc()
+			if raw_input("Rerun?[Y/n]") != 'Y':
+				fail_file.write("Parse %s error!\n" % filename)
+				raise Exception("Parse %s error!" % filename)

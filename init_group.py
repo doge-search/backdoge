@@ -21,11 +21,8 @@ if args.RESET:
 	common.init_table("doge_group")
 	exit(0)
 
-import os
-try:
-	import xml.etree.cElementTree as ET
-except ImportError:
-	import xml.etree.ElementTree as ET
+succ_file = open("group_succ.list", "a")
+fail_file = open("group_fail.list", "a")
 
 import re
 
@@ -34,16 +31,15 @@ def name_split(name):
 
 cnt = db.query("select count(*) as cnt from doge_group")[0]["cnt"]
 
+import os
 for node in os.listdir(args.DIR):
 	path = os.path.join(args.DIR, node)
 	if not os.path.isdir(path):
 		continue
 	filename = os.path.join(path, node + "_research.xml")
-	print "Converting %s..." % filename
 	try:
-		tree = ET.ElementTree(file = filename)
-	except IOError:
-		print "File %s not found!" % filename
+		tree = common.get_tree(succ_file, fail_file, filename)
+	except:
 		continue
 	result = []
 	for group in tree.getroot():
@@ -55,7 +51,7 @@ for node in os.listdir(args.DIR):
 			if info.tag == "groupname":
 				if info.text:
 					d["name"] = info.text
-				else:
+				elif "name" not in d:
 					d["name"] = ''
 			elif info.tag == "professorname":
 				try:
@@ -110,3 +106,6 @@ for node in os.listdir(args.DIR):
 		d["prof_name"] += ''.join([x + "|" for x in prof_name])
 		result.append(d)
 	common.insert_table("doge_group", result)
+
+succ_file.close()
+fail_file.close()
