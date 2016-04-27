@@ -23,13 +23,14 @@ DB_INIT_TABLE = {
 	`id` int NOT NULL AUTO_INCREMENT,
 	`school` varchar(255) NOT NULL,
 	`name` varchar(255) NOT NULL,
-	`title` varchar(255) DEFAULT NULL,
-	`office` varchar(255) DEFAULT NULL,
-	`email` varchar(255) DEFAULT NULL,
-	`phone` varchar(255) DEFAULT NULL,
-	`website` varchar(255) DEFAULT NULL,
-	`image` varchar(255) DEFAULT NULL,
-	`group` varchar(255) DEFAULT NULL,
+	`title` varchar(255) NOT NULL,
+	`office` varchar(255) NOT NULL,
+	`email` varchar(255) NOT NULL,
+	`phone` varchar(255) NOT NULL,
+	`website` varchar(255) NOT NULL,
+	`image` varchar(255) NOT NULL,
+	`group` varchar(255) NOT NULL,
+	`papers` decimal(20, 15) NOT NULL,
 	PRIMARY KEY (`id`)
 ) DEFAULT CHARSET=utf8""",
 		"doge_group":
@@ -37,8 +38,8 @@ DB_INIT_TABLE = {
 	`id` int NOT NULL AUTO_INCREMENT,
 	`school` varchar(255) NOT NULL,
 	`name` varchar(255) NOT NULL,
-	`prof_id` varchar(1023) DEFAULT NULL,
-	`prof_name` varchar(1023) DEFAULT NULL,
+	`prof_id` varchar(1023) NOT NULL,
+	`prof_name` varchar(1023) NOT NULL,
 	PRIMARY KEY (`id`)
 ) DEFAULT CHARSET=utf8"""
 		}
@@ -46,7 +47,7 @@ DB_INIT_TABLE = {
 DB_INSERT_TABLE = {
 		"doge_prof": [
 			"school", "name", "title", "office", "email",
-			"phone", "website", "image", "group"
+			"phone", "website", "image", "group", "papers"
 			],
 		"doge_group": [
 			"school", "name", "prof_id", "prof_name"
@@ -64,7 +65,8 @@ def insert_table(table_name, params):
 	db.insertmany(sql,
 			[
 				[
-					elem[t] if t in elem else ''
+					elem[t] if (t in elem and elem[t]) else \
+							('-1' if t == 'papers' else '')
 					for t in arg_list
 					]
 				for elem in params
