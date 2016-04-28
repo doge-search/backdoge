@@ -13,15 +13,28 @@ class profListHandler(tornado.web.RequestHandler):
 		try:
 			skip = int(self.get_argument("skip"))
 			search = self.get_argument("search", "")
+			sp = search.split()
+			groupid_list = []
+			search = ""
+			for i in sp:
+				try:
+					if i[:8] == 'groupid:':
+						groupid_list.append(int(i[8:]))
+						continue
+				except:
+					pass
+				search += " " + i
 			search = re.sub(r'[^A-Za-z]', ' ', search).split()
 			sql = "select * from doge_prof"
-			if search:
+			if search or groupid_list:
 				sql += " where "
 				sql += " and ".join(
-						["(school like %s or name like %s)"] * len(search)
+						["(school like %s or name like %s)"] * len(search) + \
+								["`group` like %s"] * len(groupid_list)
 						)
 				search = ['%' + x + '%' for x in search]
 				search = list(chain(*zip(search, search)))
+				search.extend(["%|" + str(x) + "|%" for x in groupid_list])
 			sql += " order by papers desc limit %d, 11" % skip
 			params = [sql] + search
 			result = common.db.query(*params)
