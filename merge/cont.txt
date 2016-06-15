@@ -1,0 +1,99 @@
+ASU	Arizona State University
+AUBURN	Auburn University
+Boston	Boston University
+brandeis	Brandeis University
+brown	Brown University
+BUFFALO	University at Buffalo
+BYU	Brigham Young University
+Caltech	California Institute of Technology
+CASE	Case Western Reserve University
+clemson	Clemson University
+CMU	Carnegie Mellon University
+Colorado	University of Colorado Boulder
+COLOSTATE	Colorado State University
+columbia	Columbia University
+Cornell	Cornell University
+CUNY	The Graduate Center CUNY
+Dartmouth	Dartmouth College
+drexel	Drexel University
+duke	Duke University
+FSU	Florida State University
+Gatech	Georgia Institute of Technology
+GMU	George Mason University
+GWU	George Washington University
+harvard	Harvard University
+iastate	Iowa State University
+Indiana	Indiana University Bloomington
+JHU	Johns Hopkins University
+KSU	Kansas State University
+KU	University of Kansas
+MIT	Massachusetts Institute of Technology
+MSU	Michigan State University
+NCSU	North Carolina State University
+NEU	Northeastern University
+NJIT	New Jersey Institute of Technology
+northwestern	Northwestern University
+NPS	Naval Postgraduate School
+NYU	New York University
+OHSU	Ohio State University
+oregonstate	Oregon State University
+OSU	Oregon Health & Science University
+Princeton	Princeton University
+PSU	Pennsylvania State University
+purdue	Purdue University
+rice	Rice University
+Rochester	University of Rochester
+RPI	Rensselaer Polytechnic Institute
+Rutgers	Rutgers University
+Stanford	Stanford University
+StonyBrook	Stony Brook University
+SU	Syracuse University
+TAMU	Texas A&M University
+TUFTS	Tufts University
+UArizona	University of Arizona
+UCB	University of California Berkeley
+UCDavis	University of California Davis
+UCF	University of Central Florida
+UChicago	University of Chicago
+UCI	University of California Irvine
+UCLA	University of California Los Angeles
+UCONN	University of Connecticut
+UCR	University of California Riverside
+UCSB	University of California Santa Barbara
+UCSD	University of California San Diego
+UDEL	University of Delaware
+UFL	University of Florida
+UGA	University of Georgia
+UIC	University of Illinois at Urbana-Champaign
+UIOWA	University of Iowa
+UIUC	University of Illinois at Chicago
+UKY	University of Kentucky
+UMASS	University of Massachusetts Amherst
+UMBC	University of Maryland Baltimore County
+UMD	University of Maryland College Park
+umich	University of Michigan
+UMN	University of Minnesota
+UNC	University of North Carolina at Chapel Hill
+UND	University of Notre Dame
+UNL	University of Nebraska-Lincoln
+UNM	University of New Mexico
+UOREGON	University of Oregon
+upenn	University of Pennsylvania
+UPitt	University of Pittsburgh
+USC	University of Southern California
+USCS	University of California Santa Cruz
+UTA	University of Texas at Arlington
+Utah	University of Utah
+UTDALLAS	University of Texas at Dallas
+UTEXAS	University of Texas at Austin
+UTK	University of Tennessee
+UWashington	University of Washington
+virginia	University of Virginia
+VirginiaTech	Virginia Tech
+VU	Vanderbilt University
+WISC	University of Wisconsin-Madison
+WM	College of William & Mary
+WPI	Worcester Polytechnic Institute
+WSU	Washington State University
+Wustl	Washington University in St. Louis
+yale	Yale University
