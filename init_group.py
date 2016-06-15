@@ -7,11 +7,11 @@ group = parser.add_mutually_exclusive_group(required = True)
 group.add_argument('-a',
 		action = 'store',
 		dest = 'DIR',
-		help='append a directory')
+		help = 'append a directory')
 group.add_argument('-c',
 		action = 'store_true',
 		dest = 'RESET',
-		help='reset database')
+		help = 'reset database')
 args = parser.parse_args()
 
 import common

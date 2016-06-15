@@ -31,6 +31,21 @@ DB_INIT_TABLE = {
 	`image` varchar(255) NOT NULL,
 	`group` varchar(255) NOT NULL,
 	`papers` decimal(20, 15) NOT NULL,
+	`rank` varchar(255) NOT NULL,
+	`h-index` varchar(255) NOT NULL,
+	`h-index-2011` varchar(255) NOT NULL,
+	`citation-count` varchar(255) NOT NULL,
+	`citation-count-2011` varchar(255) NOT NULL,
+	`histogram` varchar(255) NOT NULL,
+	`subfields` varchar(511) NOT NULL,
+	`rising-star` varchar(255) NOT NULL,
+	`paper-count` varchar(255) NOT NULL,
+	`paper-count-2011` varchar(255) NOT NULL,
+	`rank-a-paper-count` varchar(255) NOT NULL,
+	`rank-a-paper-count-2011` varchar(255) NOT NULL,
+	`acm-fellow` varchar(10) NOT NULL,
+	`ieee-fellow` varchar(10) NOT NULL,
+	`nsf-funding` varchar(10) NOT NULL,
 	PRIMARY KEY (`id`)
 ) DEFAULT CHARSET=utf8""",
 		"doge_group":
@@ -47,7 +62,22 @@ DB_INIT_TABLE = {
 DB_INSERT_TABLE = {
 		"doge_prof": [
 			"school", "name", "title", "office", "email",
-			"phone", "website", "image", "group", "papers"
+			"phone", "website", "image", "group", "papers",
+			"rank",
+			"h-index",
+			"h-index-2011",
+			"citation-count",
+			"citation-count-2011",
+			"histogram",
+			"subfields",
+			"rising-star",
+			"paper-count",
+			"paper-count-2011",
+			"rank-a-paper-count",
+			"rank-a-paper-count-2011",
+			"acm-fellow",
+			"ieee-fellow",
+			"nsf-funding"
 			],
 		"doge_group": [
 			"school", "name", "prof_id", "prof_name"
