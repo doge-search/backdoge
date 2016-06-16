@@ -19,36 +19,41 @@ class profListHandler(tornado.web.RequestHandler):
 	def get(self):
 		try:
 			skip = int(self.get_argument("skip"))
-			search = self.get_argument("search", "")
-			search = re.sub(r'[^A-Za-z:]', ' ', search).split()
-			search_sql_list = []
-			search_param_list = []
-			sql = "select * from doge_prof"
-			for i in search:
-				pos = i.find(':')
-				if pos != -1:
-					q = i[:pos]
-					if q in self.query: 
-						w = i[pos + 1:].replace(":", "")
-						if w != "":
-							if q in ["acm", "ieee", "nsf"]:
-								search_sql_list.append(self.query[q] + "=%s")
-								search_param_list.append(str(w[0].lower() != 'n'))
-							else:
-								search_sql_list.append(self.query[q] + " like %s")
-								search_param_list.append('%' + w + '%')
+			group = self.get_argument("group", "")
+			if group != "":
+				sql = "select * from doge_prof where `group` like %s"
+				search = ["%|" + group + "|%"]
+			else:
+				search = self.get_argument("search", "")
+				search = re.sub(r'[^A-Za-z:]', ' ', search).split()
+				search_sql_list = []
+				search_param_list = []
+				sql = "select * from doge_prof"
+				for i in search:
+					pos = i.find(':')
+					if pos != -1:
+						q = i[:pos]
+						if q in self.query: 
+							w = i[pos + 1:].replace(":", "")
+							if w != "":
+								if q in ["acm", "ieee", "nsf"]:
+									search_sql_list.append(self.query[q] + "=%s")
+									search_param_list.append(str(w[0].lower() != 'n'))
+								else:
+									search_sql_list.append(self.query[q] + " like %s")
+									search_param_list.append('%' + w + '%')
+						else:
+							search_sql_list.append("(school like %s or name like %s)")
+							search_param_list.append('%' + i + '%')
+							search_param_list.append('%' + i + '%')
 					else:
 						search_sql_list.append("(school like %s or name like %s)")
 						search_param_list.append('%' + i + '%')
 						search_param_list.append('%' + i + '%')
-				else:
-					search_sql_list.append("(school like %s or name like %s)")
-					search_param_list.append('%' + i + '%')
-					search_param_list.append('%' + i + '%')
-			if search_sql_list:
-				sql += " where "
-				sql += " and ".join(search_sql_list)
-			search = search_param_list
+				if search_sql_list:
+					sql += " where "
+					sql += " and ".join(search_sql_list)
+				search = search_param_list
 			sql += " order by papers desc limit %d, 11" % skip
 			params = [sql] + search
 			result = common.db.query(*params)
