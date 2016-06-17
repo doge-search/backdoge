@@ -52,6 +52,7 @@ DB_INIT_TABLE = {
 """CREATE TABLE `doge_group` (
 	`id` int NOT NULL AUTO_INCREMENT,
 	`school` varchar(255) NOT NULL,
+	`rank` int NOT NULL,
 	`name` varchar(255) NOT NULL,
 	`prof_id` varchar(1023) NOT NULL,
 	`prof_name` varchar(1023) NOT NULL,
@@ -80,7 +81,7 @@ DB_INSERT_TABLE = {
 			"nsf-funding"
 			],
 		"doge_group": [
-			"school", "name", "prof_id", "prof_name"
+			"school", "name", "rank", "prof_id", "prof_name"
 			]
 		}
 

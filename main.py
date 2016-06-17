@@ -59,6 +59,8 @@ class profListHandler(tornado.web.RequestHandler):
 			result = common.db.query(*params)
 			for i in result:
 				i['papers'] = str(i['papers'])[:6]
+				if i['histogram'] != "":
+					i['histogram'] = map(int, i['histogram'].split(','))
 			self.write(tornado.escape.json_encode(result))
 		except:
 			traceback.print_exc()
@@ -130,7 +132,7 @@ class groupListHandler(tornado.web.RequestHandler):
 				sql += " where "
 				sql += " and ".join(search_sql_list)
 			search = search_param_list
-			sql += " limit %d, 31" % skip
+			sql += " order by rank limit %d, 31" % skip
 			params = [sql] + search
 			result = common.db.query(*params)
 			self.write(tornado.escape.json_encode(result))

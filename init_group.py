@@ -21,6 +21,26 @@ if args.RESET:
 	common.init_table("doge_group")
 	exit(0)
 
+import sys
+wd_cont = dict([[y.strip() for y in x.split('\t')[::-1]]
+	for x in open('merge/cont.txt').readlines()])
+wd_tree = common.get_tree(
+		sys.stderr,
+		sys.stderr,
+		'merge/professor_2016-06-07_13h35m36.xml'
+		)
+wd_list = {}
+for prof in wd_tree.getroot():
+	for info in prof:
+		if info.tag == "university":
+			for i in info:
+				if i.tag == 'name':
+					school = wd_cont[i.text]
+				elif i.tag == 'rank':
+					rank = i.text
+	if school not in wd_list:
+		wd_list[school] = rank
+
 succ_file = open("group_succ.list", "a")
 fail_file = open("group_fail.list", "a")
 
@@ -44,7 +64,8 @@ for node in os.listdir(args.DIR):
 	result = []
 	for group in tree.getroot():
 		cnt += 1
-		d = {"school": node, "prof_id": "|", "prof_name": "|"}
+		d = {"school": node, "rank": wd_list[node],
+				"prof_id": "|", "prof_name": "|"}
 		prof_id = []
 		prof_name = []
 		for info in group:
